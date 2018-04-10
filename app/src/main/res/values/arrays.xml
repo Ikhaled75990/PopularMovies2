@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="sort">
+        <item>Top Rated</item>
+        <item>Most Popular</item>
+
+    </string-array>
+
+    <string-array name="sortValues">
+        <item>top_rated</item>
+        <item>most_popular</item>
+
+    </string-array>
+</resources>
