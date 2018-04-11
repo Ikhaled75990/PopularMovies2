@@ -21,6 +21,7 @@ public class PopularMoviesAdapter extends RecyclerView.Adapter<PopularMoviesAdap
 
     public void setPosterList(PopularMovies[] set_poster_list) {
         this.movieList = set_poster_list;
+        notifyDataSetChanged();
     }
 
 
