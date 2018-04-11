@@ -21,7 +21,7 @@ public class QueryUtils {
 
     private static final String POPULAR_MOVIE_BASE_URL = "https://api.themoviedb.org/3/movie";
     private static final String API = "api_key";
-    private static final String API_KEY = "96c1dbfb8dd93fd10fb7f4a9892a08e7";
+    private static final String API_KEY = "";
 
 
     public static URL buildUrl(String sortOrder) {
