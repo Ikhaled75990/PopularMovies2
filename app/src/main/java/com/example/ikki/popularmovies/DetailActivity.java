@@ -25,6 +25,7 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_detail);
 
         mTitleTv = findViewById(R.id.movie_title_tv);
         mPosterIv = findViewById(R.id.movie_poster_iv);
