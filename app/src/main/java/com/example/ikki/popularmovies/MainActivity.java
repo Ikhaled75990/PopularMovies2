@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
 
         if (item.getItemId() == R.id.sort_by) {
             startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+            return true;
 
         }
         return super.onOptionsItemSelected(item);
