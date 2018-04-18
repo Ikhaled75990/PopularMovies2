@@ -32,7 +32,7 @@ public class PopularMoviesAdapter extends RecyclerView.Adapter<PopularMoviesAdap
     }
 
     public PopularMoviesAdapter(PopularMoviesAdapterOnClickHandler moviesAdapterOnClickHandler) {
-        mPopularMoviesClickHandler = moviesAdapterOnClickHandler;
+        this.mPopularMoviesClickHandler = moviesAdapterOnClickHandler;
 
     }
 
@@ -72,10 +72,10 @@ public class PopularMoviesAdapter extends RecyclerView.Adapter<PopularMoviesAdap
 
     @Override
     public int getItemCount() {
-        if (movieList == null) {
-            return 0;
-        } else {
-            return movieList.length;
+        int ret = 0;
+        if (movieList != null) {
+            ret = movieList.length;
         }
+        return ret;
     }
 }
