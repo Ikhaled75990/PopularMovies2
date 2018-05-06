@@ -27,7 +27,7 @@
                 android:id="@+id/movie_poster_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="fill"
+                android:layout_gravity="center"
                 android:padding="4dp" />
 
             <TextView
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:padding="4dp"
                 android:scrollbarSize="24sp"
-                android:text="Rating:"
+                android:text="@string/user_rating"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold" />
 
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:padding="4dp"
                 android:scrollbarSize="24sp"
-                android:text="Release Date:"
+                android:text="@string/release_date"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold" />
 
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:padding="4dp"
                 android:scrollbarSize="24sp"
-                android:text="Synopsis:"
+                android:text="@string/syonpsis"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold" />
 
