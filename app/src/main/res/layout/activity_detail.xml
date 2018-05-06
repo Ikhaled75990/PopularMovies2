@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/colorPrimary">
+    android:background="#000000"
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -18,31 +18,65 @@
                 android:id="@+id/movie_title_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="4dp" />
+                android:padding="4dp"
+                android:textColor="#FFFFFF"
+                android:textSize="32sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/movie_poster_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="fill"
                 android:padding="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:scrollbarSize="24sp"
+                android:text="Rating:"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/movie_rating_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="4dp" />
+                android:padding="4dp"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:scrollbarSize="24sp"
+                android:text="Release Date:"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/movie_date_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="4dp" />
+                android:padding="4dp"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:scrollbarSize="24sp"
+                android:text="Synopsis:"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/movie_synopsis_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="4dp" />
+                android:padding="4dp"
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
 

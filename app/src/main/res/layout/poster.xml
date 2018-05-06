@@ -5,9 +5,9 @@
     android:background="#000000">
 
     <ImageView
-        android:id="@+id/poster"
+        android:id="@+id/poster_iv"
         android:layout_width="400dp"
-        android:layout_height="250dp"
+        android:layout_height="315dp"
         android:layout_gravity="center"
         android:contentDescription="@string/poster" />
 

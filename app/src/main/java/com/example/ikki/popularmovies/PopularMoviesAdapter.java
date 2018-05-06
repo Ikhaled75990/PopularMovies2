@@ -15,7 +15,6 @@ import com.squareup.picasso.Picasso;
 
 public class PopularMoviesAdapter extends RecyclerView.Adapter<PopularMoviesAdapter.PopularMoviesAdapterViewHolder> {
 
-    private String LOG_TAG = PopularMoviesAdapter.class.getSimpleName();
     private PopularMovies[] movieList;
     private final PopularMoviesAdapterOnClickHandler mPopularMoviesClickHandler;
 
@@ -44,7 +43,7 @@ public class PopularMoviesAdapter extends RecyclerView.Adapter<PopularMoviesAdap
 
         public PopularMoviesAdapterViewHolder(View itemView) {
             super(itemView);
-            mImageView = itemView.findViewById(R.id.poster);
+            mImageView = itemView.findViewById(R.id.poster_iv);
             itemView.setOnClickListener(this);
         }
 

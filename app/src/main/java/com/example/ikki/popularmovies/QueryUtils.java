@@ -88,10 +88,10 @@ public class QueryUtils {
                 mReleaseDate = jsonArray.getJSONObject(i).getString(RELEASE_DATE);
                 mSynopsis = jsonArray.getJSONObject(i).getString(PLOT_OVERVIEW);
                 mPoster_path = jsonArray.getJSONObject(i).getString(MOVIE_POSTER);
-                mPoster = POSTER_URL + mPoster_path;
+                mPoster = POSTER_URL + mPoster_path.substring(1);
                 mUserRating = jsonArray.getJSONObject(i).getDouble(USER_RATING);
 
-                container[i] = new PopularMovies(mTitle, mReleaseDate, mSynopsis, mUserRating, mPoster);
+                container[i] = new PopularMovies(mTitle, mReleaseDate, mPoster, mUserRating, mSynopsis);
             }
 
             return container;

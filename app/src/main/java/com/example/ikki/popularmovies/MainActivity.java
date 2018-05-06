@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,7 +23,7 @@ import java.io.IOException;
 import java.net.URL;
 
 
-public class MainActivity extends AppCompatActivity implements PopularMoviesAdapter.PopularMoviesAdapterOnClickHandler {
+public class MainActivity extends AppCompatActivity implements PopularMoviesAdapter.PopularMoviesAdapterOnClickHandler, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private RecyclerView mRecyclerView;
     private PopularMoviesAdapter mMoviesAdapter;
@@ -51,9 +52,14 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
         mRecyclerView.setVisibility(View.VISIBLE);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         sortBy = sharedPreferences.getString("sort_by", "popular");
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
         new FetchMovieList().execute(sortBy);
 
     }
+
+
+
+
 
     private void showErrorMessage() {
         mRecyclerView.setVisibility(View.INVISIBLE);
@@ -93,6 +99,37 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
 
         }
         return super.onOptionsItemSelected(item);
+
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        PreferenceManager.getDefaultSharedPreferences(this)
+                .unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        loadPoster();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        loadPoster();
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+
+        if (s.equals(sortBy)){
+            notifyAll();
+
+        }
+
     }
 
     public class FetchMovieList extends AsyncTask<String, Void, PopularMovies[]> {
