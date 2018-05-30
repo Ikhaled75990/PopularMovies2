@@ -22,12 +22,40 @@ public class QueryUtils {
     private static final String POPULAR_MOVIE_BASE_URL = "https://api.themoviedb.org/3/movie";
     private static final String API = "api_key";
     private static final String API_KEY = "";
+    private static final String ORIGINAL_TITLE = "original_title";
+    private static final String POSTER_URL = "http://image.tmdb.org/t/p/w342/";
+    private static final String MOVIE_POSTER = "poster_path";
+    private static final String PLOT_OVERVIEW = "overview";
+    private static final String USER_RATING = "vote_average";
+    private static final String RELEASE_DATE = "release_date";
+    private static final String RESULTS = "results";
+    private static final String CONTENT = "content";
+    private static final String AUTHOR = "author";
+    private static final String NAME = "name";
+    private static final String KEY = "key";
 
 
     public static URL buildUrl(String sortOrder) {
 
         Uri buildUri = Uri.parse(POPULAR_MOVIE_BASE_URL).buildUpon()
                 .appendPath(sortOrder)
+                .appendQueryParameter(API, API_KEY)
+                .build();
+
+        URL url = null;
+
+        try {
+            url = new URL(buildUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return url;
+    }
+
+    public static URL buildDetailUrl(String popularMovieId, String popularMovieDetail) {
+        Uri buildUri = Uri.parse(POPULAR_MOVIE_BASE_URL).buildUpon()
+                .appendPath(popularMovieId)
+                .appendPath(popularMovieDetail)
                 .appendQueryParameter(API, API_KEY)
                 .build();
 
@@ -64,13 +92,6 @@ public class QueryUtils {
     }
 
     public static PopularMovies[] parseJson(String json) throws JSONException {
-        final String ORIGINAL_TITLE = "original_title";
-        final String POSTER_URL = "http://image.tmdb.org/t/p/w342/";
-        final String MOVIE_POSTER = "poster_path";
-        final String PLOT_OVERVIEW = "overview";
-        final String USER_RATING = "vote_average";
-        final String RELEASE_DATE = "release_date";
-        final String RESULTS = "results";
 
         String mTitle, mReleaseDate, mPoster, mPoster_path, mSynopsis;
         double mUserRating;
@@ -96,6 +117,54 @@ public class QueryUtils {
 
             return container;
 
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Trailer[] parsePopularMovieTrailerJson(String json) throws JSONException {
+        Trailer[] parsedTrailer = null;
+
+        try {
+            JSONObject jsonObject = new JSONObject(json);
+            JSONArray jsonArray = jsonObject.getJSONArray(RESULTS);
+            parsedTrailer = new Trailer[jsonArray.length()];
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject trailer = jsonArray.getJSONObject(i);
+
+                String name = trailer.getString(NAME);
+                String key = trailer.getString(KEY);
+
+                Trailer mTrailer = new Trailer(name, key);
+                parsedTrailer[i] = mTrailer;
+            }
+            return parsedTrailer;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Review[] parsePupolarMovieReviewJson(String json) throws JSONException {
+        Review[] parsedReview = null;
+
+        try {
+            JSONObject jsonObject = new JSONObject(json);
+            JSONArray jsonArray = jsonObject.getJSONArray(RESULTS);
+            parsedReview = new Review[jsonArray.length()];
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject review = jsonArray.getJSONObject(i);
+
+                String author = review.getString(AUTHOR);
+                String content = review.getString(CONTENT);
+
+                Review mReview = new Review(author, content);
+                parsedReview[i] = mReview;
+            }
+            return parsedReview;
         } catch (JSONException e) {
             e.printStackTrace();
             return null;
