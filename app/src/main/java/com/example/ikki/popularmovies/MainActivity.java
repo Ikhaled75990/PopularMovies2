@@ -58,9 +58,6 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
     }
 
 
-
-
-
     private void showErrorMessage() {
         mRecyclerView.setVisibility(View.INVISIBLE);
         mErrorMessage.setVisibility(View.VISIBLE);
@@ -125,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
 
-        if (s.equals(sortBy)){
+        if (s.equals(sortBy)) {
             notifyAll();
 
         }

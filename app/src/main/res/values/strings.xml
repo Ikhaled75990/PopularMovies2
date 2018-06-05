@@ -11,4 +11,7 @@
     <string name="sort_by">Sort By</string>
     <string name="action_refresh">Refresh</string>
     <string name="syonpsis">Synopsis:</string>
+    <string name="favourites">Favourites</string>
+    <string name="trailer">Trailers:</string>
+    <string name="reviews">Reviews:</string>
 </resources>

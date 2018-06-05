@@ -147,7 +147,7 @@ public class QueryUtils {
         }
     }
 
-    public static Review[] parsePupolarMovieReviewJson(String json) throws JSONException {
+    public static Review[] parsePopularMoiveReviewJson(String json) throws JSONException {
         Review[] parsedReview = null;
 
         try {

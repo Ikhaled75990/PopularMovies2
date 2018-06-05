@@ -24,7 +24,6 @@ public class PopularMoviesAdapter extends RecyclerView.Adapter<PopularMoviesAdap
     }
 
 
-
     public interface PopularMoviesAdapterOnClickHandler {
         void OnClick(PopularMovies popularMovies);
 
