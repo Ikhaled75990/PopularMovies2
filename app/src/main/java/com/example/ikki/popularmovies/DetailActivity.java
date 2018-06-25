@@ -8,12 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 import android.view.View;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -57,6 +53,7 @@ public class DetailActivity extends AppCompatActivity {
     String poster;
 
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,7 +95,7 @@ public class DetailActivity extends AppCompatActivity {
         mFavourite = searchPopularMovie(mPopularMovieId);
         mCheckBoxFavourite.setChecked(mFavourite);
 
-        if (PreferenceManager.getDefaultSharedPreferences(this).equals("favourites")){
+        if (PopularMoviePreferences.getPopularMoviePreference().equals("favourites")){
             mTrailerLv.setVisibility(View.GONE);
             mReviewView.setVisibility(View.GONE);
         } else{
@@ -114,7 +111,7 @@ public class DetailActivity extends AppCompatActivity {
         if (mFavourite){
             deletePopularMovie();
             mCheckBoxFavourite.setChecked(false);
-            if (PreferenceManager.getDefaultSharedPreferences(this).equals("favourites")){
+            if (PopularMoviePreferences.getPopularMoviePreference().equals("favourites")){
                 getContentResolver().notifyChange(PopularMoviesContract.PopularMoviesEntry.CONTENT_URI, null);
 
             }
@@ -171,26 +168,8 @@ public class DetailActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = new MenuInflater(this);
-        menuInflater.inflate(R.menu.favourites, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_favourite:
-                //User's action will mark the movie as favourite and add it to
-                //database.
 
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
-    }
 
     public class loadPopularMovieTrailer extends AsyncTask<String, Void, Trailer[]> {
 
@@ -262,7 +241,7 @@ public class DetailActivity extends AppCompatActivity {
             try {
                 String jsonResponse = QueryUtils.getResponseFromHttpUrl(popularMovieRequest);
 
-                Review[] popularMovieReviewInfo = QueryUtils.parsePopularMoiveReviewJson(jsonResponse);
+                Review[] popularMovieReviewInfo = QueryUtils.parsePopularMovieReviewJson(jsonResponse);
 
                 return popularMovieReviewInfo;
             } catch (Exception e){

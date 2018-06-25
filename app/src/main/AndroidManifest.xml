@@ -20,6 +20,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="com.example.ikki.popularmovies.data.PopularMoviesProvider"
+            android:authorities="com.example.ikki.popularmovies"
+            android:exported="false" />
+
         <activity
             android:name=".DetailActivity"
             android:parentActivityName=".MainActivity"
@@ -30,16 +36,7 @@
 
             </meta-data>
         </activity>
-        <activity
-            android:name=".SettingsActivity"
-            android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity">
 
-            </meta-data>
-        </activity>
     </application>
 
 </manifest>

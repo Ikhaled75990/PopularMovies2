@@ -33,6 +33,7 @@ public class QueryUtils {
     private static final String AUTHOR = "author";
     private static final String NAME = "name";
     private static final String KEY = "key";
+    private static final String ID = "id";
 
 
     public static URL buildUrl(String sortOrder) {
@@ -94,6 +95,7 @@ public class QueryUtils {
     public static PopularMovies[] parseJson(String json) throws JSONException {
 
         String mTitle, mReleaseDate, mPoster, mPoster_path, mSynopsis;
+        int mId;
         double mUserRating;
 
         try {
@@ -105,6 +107,9 @@ public class QueryUtils {
 
             for (int i = 0; i < jsonArray.length(); i++) {
 
+
+
+                mId = jsonArray.getJSONObject(i).getInt(ID);
                 mTitle = jsonArray.getJSONObject(i).getString(ORIGINAL_TITLE);
                 mReleaseDate = jsonArray.getJSONObject(i).getString(RELEASE_DATE);
                 mSynopsis = jsonArray.getJSONObject(i).getString(PLOT_OVERVIEW);
@@ -112,7 +117,8 @@ public class QueryUtils {
                 mPoster = POSTER_URL + mPoster_path.substring(1);
                 mUserRating = jsonArray.getJSONObject(i).getDouble(USER_RATING);
 
-                container[i] = new PopularMovies(mTitle, mReleaseDate, mPoster, mUserRating, mSynopsis);
+
+                container[i] = new PopularMovies(mId, mTitle, mReleaseDate,  mPoster, mUserRating,  mSynopsis);
             }
 
             return container;
@@ -124,18 +130,18 @@ public class QueryUtils {
     }
 
     public static Trailer[] parsePopularMovieTrailerJson(String json) throws JSONException {
-        Trailer[] parsedTrailer = null;
+        String name, key;
 
         try {
             JSONObject jsonObject = new JSONObject(json);
             JSONArray jsonArray = jsonObject.getJSONArray(RESULTS);
-            parsedTrailer = new Trailer[jsonArray.length()];
+            Trailer[] parsedTrailer = new Trailer[jsonArray.length()];
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject trailer = jsonArray.getJSONObject(i);
 
-                String name = trailer.getString(NAME);
-                String key = trailer.getString(KEY);
+                 name = trailer.getString(NAME);
+                 key = trailer.getString(KEY);
 
                 Trailer mTrailer = new Trailer(name, key);
                 parsedTrailer[i] = mTrailer;
@@ -147,13 +153,12 @@ public class QueryUtils {
         }
     }
 
-    public static Review[] parsePopularMoiveReviewJson(String json) throws JSONException {
-        Review[] parsedReview = null;
+    public static Review[] parsePopularMovieReviewJson(String json) throws JSONException {
 
         try {
             JSONObject jsonObject = new JSONObject(json);
             JSONArray jsonArray = jsonObject.getJSONArray(RESULTS);
-            parsedReview = new Review[jsonArray.length()];
+            Review[] parsedReview = new Review[jsonArray.length()];
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject review = jsonArray.getJSONObject(i);

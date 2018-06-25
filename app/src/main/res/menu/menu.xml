@@ -5,15 +5,25 @@
     tools:context=".MainActivity">
 
     <item
-        android:id="@+id/action_refresh"
-        android:orderInCategory="1"
-        android:title="@string/action_refresh"
-        app:showAsAction="always" />
+        android:title="@string/sort_by"
+        app:showAsAction="ifRoom">
 
-    <item
-        android:id="@+id/sort_by"
-        android:title="@string/settings"
-        app:showAsAction="never" />
+        <menu>
+
+            <item
+                android:id="@+id/sort_popular"
+                android:title="@string/sort_default" />
+
+            <item
+                android:id="@+id/sort_rating"
+                android:title="@string/top_rated" />
+
+            <item
+                android:id="@+id/sort_favourites"
+                android:title="@string/favourites" />
+        </menu>
+
+    </item>
 
 
 </menu>

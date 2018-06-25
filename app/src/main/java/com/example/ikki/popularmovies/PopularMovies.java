@@ -8,13 +8,15 @@ import android.graphics.Movie;
 
 public class PopularMovies {
 
+    private int mId;
     private String mTitle;
     private String mReleaseDate;
     private String mPoster;
     private double mUserRating;
     private String mSynopsis;
 
-    public PopularMovies(String title, String releaseDate, String poster, double userRating, String synopsis){
+    public PopularMovies(int id, String title, String releaseDate, String poster, double userRating, String synopsis) {
+        mId = id;
         mTitle = title;
         mReleaseDate = releaseDate;
         mPoster = poster;
@@ -22,46 +24,53 @@ public class PopularMovies {
         mSynopsis = synopsis;
     }
 
-    public String getmTitle(){
+    public int getmId() {
+        return mId;
+    }
+
+    public void setmId(int id) {
+        this.mId = id;
+    }
+
+    public String getmTitle() {
         return mTitle;
     }
 
-    public void setmTitle(String title){
+    public void setmTitle(String title) {
         this.mTitle = title;
     }
 
-    public String getmReleaseDate(){
+    public String getmReleaseDate() {
         return mReleaseDate;
     }
 
-    public void setmReleaseDate(String releaseDate){
+    public void setmReleaseDate(String releaseDate) {
         this.mReleaseDate = releaseDate;
     }
 
-    public String getmPoster(){
+    public String getmPoster() {
         return mPoster;
     }
 
-    public void setmPoster(String poster){
+    public void setmPoster(String poster) {
         this.mPoster = poster;
     }
 
-    public double getmUserRating(){
+    public double getmUserRating() {
         return mUserRating;
     }
 
-    public void setmUserRating(double userRating){
+    public void setmUserRating(double userRating) {
         this.mUserRating = userRating;
     }
 
-    public String getmSynopsis(){
+    public String getmSynopsis() {
         return mSynopsis;
     }
 
-    public void setmSynopsis(String synopsis){
-        this.mSynopsis= synopsis;
+    public void setmSynopsis(String synopsis) {
+        this.mSynopsis = synopsis;
     }
-
 
 
 }

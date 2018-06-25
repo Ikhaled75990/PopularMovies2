@@ -22,7 +22,7 @@ public class PopularMoviesContract {
         public static final String TABLE_NAME = "popularmovies";
 
         public static final String _ID = BaseColumns._ID;
-        public static final String COLUMN_MOVIE_ID = "MovieID";
+        public static final String COLUMN_MOVIE_ID = "PopularMovieID";
         public static final String COLUMN_MOVIE_TITLE = "Title";
         public static final String COLUMN_MOVIE_IMAGE = "Image";
         public static final String COLUMN_MOVIE_RATING = "Rating";
