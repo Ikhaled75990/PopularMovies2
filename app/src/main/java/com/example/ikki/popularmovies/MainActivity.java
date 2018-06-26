@@ -100,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
                 return true;
             case R.id.sort_favourites:
                 PopularMoviePreferences.sortFavourites();
-                loadPoster();
                 getSupportLoaderManager().initLoader(POPULARMOVIE_LOADER, null, this);
                 setTitle(R.string.favourites);
         }
