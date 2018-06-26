@@ -91,10 +91,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="4dp"
+                android:paddingBottom="4dp"
+                android:paddingTop="8dp"
+                android:scrollbarSize="24sp"
                 android:text="@string/synopsis"
                 android:textColor="#FFFFFF"
-                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -108,21 +109,23 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="4dp">
 
                 <TextView
                     android:id="@+id/trailer_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:scrollbarSize="24sp"
                     android:text="@string/trailer"
                     android:textColor="#FFFFFF"
-                    android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <ListView
                     android:id="@+id/trailer_lv"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:padding="4dp">
 
                 </ListView>
             </LinearLayout>
@@ -130,14 +133,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="4dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:scrollbarSize="24sp"
                     android:text="@string/reviews"
                     android:textColor="#FFFFFF"
-                    android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <LinearLayout

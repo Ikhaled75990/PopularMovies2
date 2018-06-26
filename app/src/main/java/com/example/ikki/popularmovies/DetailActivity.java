@@ -53,7 +53,6 @@ public class DetailActivity extends AppCompatActivity {
     String poster;
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,10 +94,10 @@ public class DetailActivity extends AppCompatActivity {
         mFavourite = searchPopularMovie(mPopularMovieId);
         mCheckBoxFavourite.setChecked(mFavourite);
 
-        if (PopularMoviePreferences.getPopularMoviePreference().equals("favourites")){
+        if (PopularMoviePreferences.getPopularMoviePreference().equals("favourites")) {
             mTrailerLv.setVisibility(View.GONE);
             mReviewView.setVisibility(View.GONE);
-        } else{
+        } else {
             new loadPopularMovieTrailer().execute(mPopularMovieId, "videos");
             new loadPopularMovieReview().execute(mPopularMovieId, "reviews");
         }
@@ -106,12 +105,13 @@ public class DetailActivity extends AppCompatActivity {
 
     }
 
+
     public void onCheckBoxClicked(View view) {
 
-        if (mFavourite){
+        if (mFavourite) {
             deletePopularMovie();
             mCheckBoxFavourite.setChecked(false);
-            if (PopularMoviePreferences.getPopularMoviePreference().equals("favourites")){
+            if (PopularMoviePreferences.getPopularMoviePreference().equals("favourites")) {
                 getContentResolver().notifyChange(PopularMoviesContract.PopularMoviesEntry.CONTENT_URI, null);
 
             }
@@ -166,9 +166,6 @@ public class DetailActivity extends AppCompatActivity {
             cursor.close();
         }
     }
-
-
-
 
 
     public class loadPopularMovieTrailer extends AsyncTask<String, Void, Trailer[]> {
@@ -244,7 +241,7 @@ public class DetailActivity extends AppCompatActivity {
                 Review[] popularMovieReviewInfo = QueryUtils.parsePopularMovieReviewJson(jsonResponse);
 
                 return popularMovieReviewInfo;
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
                 return null;
             }
@@ -257,7 +254,7 @@ public class DetailActivity extends AppCompatActivity {
             mReviewAdapter = new ReviewAdapter(DetailActivity.this, mReview);
             final int view = mReviewAdapter.getCount();
 
-            for (int i = 0; i < view; i++){
+            for (int i = 0; i < view; i++) {
                 View views = mReviewAdapter.getView(i, null, null);
                 mReviewView.addView(views);
             }

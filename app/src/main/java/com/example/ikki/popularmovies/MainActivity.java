@@ -51,16 +51,19 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
         mErrorMessage.setVisibility(View.INVISIBLE);
         mRecyclerView.setVisibility(View.VISIBLE);
         String moviePreference = PopularMoviePreferences.getPopularMoviePreference();
+
+        if (moviePreference.equals("favourites")){
+            getSupportLoaderManager().restartLoader(POPULARMOVIE_LOADER, null, this);
+        } else {
         new FetchMovieList().execute(moviePreference);
-    }
-
-
+    }}
 
 
     private void showErrorMessage() {
         mRecyclerView.setVisibility(View.INVISIBLE);
         mErrorMessage.setVisibility(View.VISIBLE);
     }
+
 
     @Override
     public void OnClick(PopularMovies popularMovies) {
@@ -87,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        switch (id){
+        switch (id) {
             case R.id.sort_popular:
                 PopularMoviePreferences.sortMostPopular();
                 loadPoster();
@@ -151,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
     }
 
     @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args){
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String[] projection = {
                 PopularMoviesContract.PopularMoviesEntry.COLUMN_MOVIE_ID,
                 PopularMoviesContract.PopularMoviesEntry.COLUMN_MOVIE_TITLE,
@@ -167,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        if (data == null){
+        if (data == null) {
             mRecyclerView.setVisibility(View.GONE);
             mErrorMessage.setVisibility(View.VISIBLE);
         } else {
@@ -185,9 +188,9 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
 
     }
 
-    private PopularMovies[] CursorConverter(Cursor data){
+    private PopularMovies[] CursorConverter(Cursor data) {
         PopularMovies[] popularMoviesData = new PopularMovies[data.getCount()];
-        for (int i = 0; i < data.getCount(); i++){
+        for (int i = 0; i < data.getCount(); i++) {
             data.moveToPosition(i);
             int popularMovieId = data.getInt(data.getColumnIndexOrThrow(PopularMoviesContract.PopularMoviesEntry.COLUMN_MOVIE_ID));
             String popularMovieName = data.getString(data.getColumnIndexOrThrow(PopularMoviesContract.PopularMoviesEntry.COLUMN_MOVIE_TITLE));
