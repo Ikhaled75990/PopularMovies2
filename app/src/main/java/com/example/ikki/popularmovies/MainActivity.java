@@ -1,5 +1,6 @@
 package com.example.ikki.popularmovies;
 
+import android.os.Parcelable;
 import android.support.v4.content.CursorLoader;
 import android.content.Intent;
 import android.support.v4.app.LoaderManager;
@@ -30,6 +31,9 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
     private TextView mErrorMessage;
     private ProgressBar mProgressBar;
     private static final int POPULARMOVIE_LOADER = 0;
+    private GridLayoutManager layoutManager;
+    private static final String LIST_STATE_KEY = "recycled_state";
+    private Parcelable mListState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +43,37 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
         mRecyclerView = findViewById(R.id.movies_recyclerview);
         mProgressBar = findViewById(R.id.progressBar);
         mErrorMessage = findViewById(R.id.error_message);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false);
+        layoutManager = new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
         mMoviesAdapter = new PopularMoviesAdapter(this);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mMoviesAdapter);
         loadPoster();
+        }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mListState = layoutManager.onSaveInstanceState();
+        outState.putParcelable(LIST_STATE_KEY, mListState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle state) {
+        super.onRestoreInstanceState(state);
+
+        if (state != null){
+            mListState = state.getParcelable(LIST_STATE_KEY);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (mListState != null){
+            layoutManager.onRestoreInstanceState(mListState);
+        }
     }
 
     private void loadPoster() {
