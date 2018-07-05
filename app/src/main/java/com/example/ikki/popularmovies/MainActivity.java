@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
     private GridLayoutManager layoutManager;
     private static final String LIST_STATE_KEY = "recycled_state";
     private Parcelable mListState;
+    private static final int mPosition = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +47,21 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
         mProgressBar = findViewById(R.id.progressBar);
         mErrorMessage = findViewById(R.id.error_message);
         layoutManager = new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false);
+        int posterWidth = 500;
+        layoutManager = new GridLayoutManager(this, calculateBestSpanCount(posterWidth));
         mRecyclerView.setLayoutManager(layoutManager);
         mMoviesAdapter = new PopularMoviesAdapter(this);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mMoviesAdapter);
         loadPoster();
+        }
+
+        private int calculateBestSpanCount(int posterWidth){
+            Display display = getWindowManager().getDefaultDisplay();
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            display.getMetrics(displayMetrics);
+            float screenWidth = displayMetrics.widthPixels;
+            return Math.round(screenWidth / posterWidth);
         }
 
     @Override
@@ -178,6 +191,7 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
                 mErrorMessage.setVisibility(View.INVISIBLE);
                 mRecyclerView.setVisibility(View.VISIBLE);
                 mMoviesAdapter.setPosterList(popularMovies);
+                mRecyclerView.scrollToPosition(mPosition);
             }
         }
     }

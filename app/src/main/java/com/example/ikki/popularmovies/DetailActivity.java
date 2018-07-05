@@ -108,6 +108,7 @@ public class DetailActivity extends AppCompatActivity {
 
     public void onCheckBoxClicked(View view) {
 
+
         if (mFavourite) {
             deletePopularMovie();
             mCheckBoxFavourite.setChecked(false);
