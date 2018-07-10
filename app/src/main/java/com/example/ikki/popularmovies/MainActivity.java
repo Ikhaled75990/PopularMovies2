@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
     private GridLayoutManager layoutManager;
     private static final String LIST_STATE_KEY = "recycled_state";
     private Parcelable mListState;
-    private static final int mPosition = 1;
+    private int mPosition = RecyclerView.NO_POSITION;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
         mMoviesAdapter = new PopularMoviesAdapter(this);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mMoviesAdapter);
+        mMoviesAdapter.notifyDataSetChanged();
+        getSupportLoaderManager().initLoader(POPULARMOVIE_LOADER, null, this);
         loadPoster();
         }
 
@@ -93,12 +95,8 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
         mErrorMessage.setVisibility(View.INVISIBLE);
         mRecyclerView.setVisibility(View.VISIBLE);
         String moviePreference = PopularMoviePreferences.getPopularMoviePreference();
-
-        if (moviePreference.equals("favourites")){
-            getSupportLoaderManager().restartLoader(POPULARMOVIE_LOADER, null, this);
-        } else {
         new FetchMovieList().execute(moviePreference);
-    }}
+    }
 
 
     private void showErrorMessage() {
@@ -136,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
             case R.id.sort_popular:
                 PopularMoviePreferences.sortMostPopular();
                 loadPoster();
-                setTitle(R.string.sort_default);
+                setTitle(R.string.sort_popular);
                 return true;
             case R.id.sort_rating:
                 PopularMoviePreferences.sortTopRated();
@@ -145,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
                 return true;
             case R.id.sort_favourites:
                 PopularMoviePreferences.sortFavourites();
-                getSupportLoaderManager().initLoader(POPULARMOVIE_LOADER, null, this);
+                getSupportLoaderManager().restartLoader(POPULARMOVIE_LOADER, null, this);
                 setTitle(R.string.favourites);
         }
 
