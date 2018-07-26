@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.example.ikki.popularmovies.data.PopularMoviesContract;
 
 import java.net.URL;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements PopularMoviesAdapter.PopularMoviesAdapterOnClickHandler, LoaderManager.LoaderCallbacks<Cursor> {
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
     private GridLayoutManager layoutManager;
     private static final String LIST_STATE_KEY = "recycled_state";
     private Parcelable mListState;
-    private int mPosition = RecyclerView.NO_POSITION;
+    private int mPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,12 +67,16 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
             return Math.round(screenWidth / posterWidth);
         }
 
-    @Override
+   @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         mListState = layoutManager.onSaveInstanceState();
         outState.putParcelable(LIST_STATE_KEY, mListState);
+
     }
+
+
+
 
     @Override
     protected void onRestoreInstanceState(Bundle state) {
@@ -79,7 +84,8 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
 
         if (state != null){
             mListState = state.getParcelable(LIST_STATE_KEY);
-        }
+          }
+
     }
 
     @Override
@@ -189,7 +195,10 @@ public class MainActivity extends AppCompatActivity implements PopularMoviesAdap
                 mErrorMessage.setVisibility(View.INVISIBLE);
                 mRecyclerView.setVisibility(View.VISIBLE);
                 mMoviesAdapter.setPosterList(popularMovies);
-                mRecyclerView.scrollToPosition(mPosition);
+
+               // if (mPosition != 0){
+                 //   mRecyclerView.scrollToPosition(mPosition);
+                // }
             }
         }
     }
